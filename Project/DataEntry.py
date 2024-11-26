@@ -178,8 +178,9 @@ btnShow.place(x=30, y=10)
 tableFrame = Frame(root, background='white')
 tableFrame.place(x=370, y=1, width=940, height=510)
 
+
 style = ttk.Style()
-style.configure("mystyle.Treeview", font=('Calibri', 12), rowheight=50)
+style.configure("mystyle.Treeview", font=('Calibri', 12), rowheight=50,background="#14213d", foreground="#e5e5e5")
 style.configure("mystyle.Treeview.Heading", font=('Calibri', 12))
 
 show = ttk.Treeview(tableFrame, columns=(1, 2, 3, 4, 5, 6, 7), style="mystyle.Treeview")
