@@ -2,16 +2,17 @@ from tkinter import*  # استيراد كل العناصر من مكتبة Tkint
 from tkinter import ttk  # استيراد العناصر المخصصة من مكتبة ttk
 from database import Database
 from tkinter import messagebox
-# from tkcalendar import DateEntry  # استيراد DateEntry من مكتبة tkcalendar
+
 
 
 root=Tk()  # إنشاء نافذة التطبيق الرئيسية
 root.geometry("1300x515")  # تعيي أبعاد النافذة
 root.title("Employee management")  # تعيين عنوان النافذة
 root.configure(bg="#003049") #تعيين لون الخلفية
-root.iconbitmap(False,'Icons\\teamwork.ico')
+root.iconbitmap(False,'Icons\\teamwork.ico') # تعيين ايقون للبرنامج
+root.resizable(False,False) #(1300x515) تثبيت الحجم وعدم جعله يصغر او يكبر عن 
 # ##############################################
-database = Database("employee.db")
+database = Database("employee.db") #اعداد قاعدة بيانات
 
 # تعريف المتغيرات الخاصة بالحقول
 name = StringVar()
@@ -22,15 +23,15 @@ phone = StringVar()
 
 # ===============Create Frame ============
 
-inputsFrame = Frame(root, background='#003049')
-inputsFrame.place(x=1, y=1, width=360, height=515)
-title = Label(inputsFrame, text='Employee SYS', font=('Calibri', 18, 'bold'), bg="#003049", fg='white')
-title.place(x=100, y=1)
+inputsFrame = Frame(root, background='#003049') # تعيين مساحة معينه لاضافة المدخلات والازرار
+inputsFrame.place(x=1, y=1, width=360, height=515) # تعيين ابعاد المساحة
+title = Label(inputsFrame, text='Employee SYS', font=('Calibri', 18, 'bold'), bg="#003049", fg='white') # تسمية المساحة
+title.place(x=100, y=1) # ادراج الاسم في الفريم
 
 # ===============field Name=============
 
 lblName = Label(inputsFrame, text='Name', font=('Calibri', 16), bg="#003049", fg='white')
-lblName.place(x=15, y=50)
+lblName.place(x=15, y=50)# ادراج الاسم الحقل في الفريم
 inputName = Entry(inputsFrame, textvariable=name, width=20, font=('Calibri', 16))
 inputName.place(x=75, y=50)  # وضع حقل الإدخال في الشبكة
 
@@ -168,6 +169,7 @@ btnUpdata.place(x=2, y=50)
 btnClear = Button(btnFrame, text='Clear Data', width=12, height=1, font=('Calibri', 16), fg='white', bg='#0077b6', border=0, command=clear)
 btnClear.place(x=155, y=50)
 # ======================================================================
+
 # ==========Buttons(Hide TreeView/ Show TreeView)=======================
 btnHide = Button(inputsFrame, text="HIDE", command=Hide, fg='white', cursor='hand2', bg='#e63946', border=0)
 btnHide.place(x=270, y=10)
