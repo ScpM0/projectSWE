@@ -17,6 +17,7 @@ class Database:
         phone text
         )
         """
+        
         self.cur.execute(sql)
         self.con.commit()  
 
@@ -35,7 +36,19 @@ class Database:
     def remove(self, id):
         # حذف موظف من الجدول بناءً على المعرف (ID)
         self.cur.execute("DELETE FROM employees WHERE id=?", (id,))
+        self.cur.execute("""
+    WITH updated AS (
+        SELECT id, ROW_NUMBER() OVER (ORDER BY id) AS new_id
+        FROM employees
+    )
+    UPDATE employees
+    SET id = updated.new_id
+    FROM updated
+    WHERE employees.id = updated.id;
+    """)
         self.con.commit()
+
+        
 
     def update(self, id, name, age, job, gender, address, phone):
         # تحديث بيانات موظف محدد في الجدول
