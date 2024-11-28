@@ -66,4 +66,4 @@ class Database:
         """
         self.cur.execute(query)
         rows = self.cur.fetchall()
-            return rows
+        return rows
