@@ -8,16 +8,15 @@ class Database:
         # إنشاء جدول إذا لم يكن موجودًا بالفعل
         sql = """
         CREATE TABLE IF NOT EXISTS employees (
-        id Integer Primary Key,
-        name text,
-        age text,
-        job text,
-        gender text,
-        address text,
-        phone text
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        age TEXT,
+        job TEXT,
+        gender TEXT,
+        address TEXT,
+        phone TEXT
         )
         """
-        
         self.cur.execute(sql)
         self.con.commit()  
 
@@ -48,10 +47,23 @@ class Database:
     """)
         self.con.commit()
 
-        
-
     def update(self, id, name, age, job, gender, address, phone):
         # تحديث بيانات موظف محدد في الجدول
         self.cur.execute("UPDATE employees SET name=?, age=?, job=?, gender=?, address=?, phone=? WHERE id=?",
                         (name, age, job, gender, address, phone, id))
         self.con.commit()
+
+    def search(self, keyword):
+        # البحث في الجدول باستخدام الكلمة الرئيسية
+        query = f"""
+        SELECT * FROM employees
+        WHERE name LIKE '%{keyword}%' OR 
+              age LIKE '%{keyword}%' OR 
+              job LIKE '%{keyword}%' OR 
+              gender LIKE '%{keyword}%' OR 
+              address LIKE '%{keyword}%' OR 
+              phone LIKE '%{keyword}%'
+        """
+        self.cur.execute(query)
+        rows = self.cur.fetchall()
+        return rows
